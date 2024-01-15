@@ -1,13 +1,20 @@
-import { useState, useEffect } from 'react';
-import { View, StyleSheet, Alert, Text, FlatList } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
+import { useEffect, useState } from "react";
+import {
+  Alert,
+  FlatList,
+  StyleSheet,
+  View,
+  useWindowDimensions,
+  ScrollView,
+} from "react-native";
 
-import NumberContainer from '../components/game/NumberContainer';
-import Card from '../components/ui/Card';
-import InstructionText from '../components/ui/InstructionText';
-import PrimaryButton from '../components/ui/PrimaryButton';
-import Title from '../components/ui/Title';
-import GuessLogItem from '../components/game/GuessLogItem';
+import GuessLogItem from "../components/game/GuessLogItem";
+import NumberContainer from "../components/game/NumberContainer";
+import Card from "../components/ui/Card";
+import InstructionText from "../components/ui/InstructionText";
+import PrimaryButton from "../components/ui/PrimaryButton";
+import Title from "../components/ui/Title";
 
 function generateRandomBetween(min, max, exclude) {
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -27,6 +34,8 @@ function GameScreen({ userNumber, onGameOver }) {
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
   const [guessRounds, setGuessRounds] = useState([initialGuess]);
 
+  const { width, height } = useWindowDimensions();
+
   useEffect(() => {
     if (currentGuess === userNumber) {
       onGameOver(guessRounds.length);
@@ -41,16 +50,16 @@ function GameScreen({ userNumber, onGameOver }) {
   function nextGuessHandler(direction) {
     // direction => 'lower', 'greater'
     if (
-      (direction === 'lower' && currentGuess < userNumber) ||
-      (direction === 'greater' && currentGuess > userNumber)
+      (direction === "lower" && currentGuess < userNumber) ||
+      (direction === "greater" && currentGuess > userNumber)
     ) {
-      Alert.alert("Don't lie!", 'You know that this is wrong...', [
-        { text: 'Sorry!', style: 'cancel' },
+      Alert.alert("Don't lie!", "You know that this is wrong...", [
+        { text: "Sorry!", style: "cancel" },
       ]);
       return;
     }
 
-    if (direction === 'lower') {
+    if (direction === "lower") {
       maxBoundary = currentGuess;
     } else {
       minBoundary = currentGuess + 1;
@@ -65,10 +74,13 @@ function GameScreen({ userNumber, onGameOver }) {
     setGuessRounds((prevGuessRounds) => [newRndNumber, ...prevGuessRounds]);
   }
 
+  const padding = height < 400 ? 12 : 24;
+
   const guessRoundsListLength = guessRounds.length;
 
   return (
-    <View style={styles.screen}>
+    // <ScrollView>
+    <View style={[styles.screen, { padding: padding }]}>
       <Title>Opponent's Guess</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
@@ -77,12 +89,12 @@ function GameScreen({ userNumber, onGameOver }) {
         </InstructionText>
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
-            <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
               <Ionicons name="md-remove" size={24} color="white" />
             </PrimaryButton>
           </View>
           <View style={styles.buttonContainer}>
-            <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
               <Ionicons name="md-add" size={24} color="white" />
             </PrimaryButton>
           </View>
@@ -102,6 +114,7 @@ function GameScreen({ userNumber, onGameOver }) {
         />
       </View>
     </View>
+    // </ScrollView>
   );
 }
 
@@ -109,14 +122,14 @@ export default GameScreen;
 
 const styles = StyleSheet.create({
   screen: {
+    alignItems: "center",
     flex: 1,
-    padding: 24,
   },
   instructionText: {
     marginBottom: 12,
   },
   buttonsContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   buttonContainer: {
     flex: 1,
