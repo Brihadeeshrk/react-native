@@ -1,31 +1,42 @@
-import React, { useLayoutEffect } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  ScrollView,
-  Button,
-} from "react-native";
-import { MEALS } from "../data/dummy-data";
+import React, { useContext, useLayoutEffect } from "react";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import Icon from "../components/Icon";
+import { MEALS } from "../data/dummy-data";
+import { FavoritesContext } from "../store/context/Favorites.context";
 
 const MealsDetails = ({ navigation, route }) => {
+  const { ids, addFavorite, removeFavorite } = useContext(FavoritesContext);
+
   const mealId = route.params.mealId;
 
-  const headerButtonPressed = () => {
-    console.log("Pressed");
+  const isFavorite = ids.includes(mealId);
+
+  const toggleFavoriteMeal = () => {
+    if (isFavorite) {
+      removeFavorite(mealId);
+      return;
+    }
+    addFavorite(mealId);
+    return;
   };
 
   useLayoutEffect(() => {
     const meal = MEALS.find((meal) => meal.id === mealId);
+
     navigation.setOptions({
       title: meal.title,
       headerRight: () => {
-        return <Icon name="star" size={24} color="white" />;
+        return (
+          <Icon
+            name={isFavorite ? "star" : "star-outline"}
+            size={24}
+            color="white"
+            onPress={toggleFavoriteMeal}
+          />
+        );
       },
     });
-  }, [mealId, navigation, headerButtonPressed]);
+  }, [mealId, navigation, isFavorite]);
 
   const meal = MEALS.find((meal) => meal.id === mealId);
 

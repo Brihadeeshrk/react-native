@@ -1,12 +1,11 @@
 {
   "expo": {
-    "name": "section6",
-    "slug": "section6",
+    "name": "section12",
+    "slug": "section12",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "backgroundColor": "#24180f",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -20,11 +19,19 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.briha.section6"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends.",
+          "cameraPermission": "The app accesses your camera to take pictures of your favorite places."
+        }
+      ]
+    ]
   }
 }
