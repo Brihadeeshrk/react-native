@@ -4,6 +4,14 @@ import Title from "../components/Core/title";
 import { Colors } from "../utils/colors";
 import Button from "../components/Core/button";
 
+/**
+ * Renders the Game Over screen with game statistics and a button to start a new game.
+ *
+ * @param {function} resetGameHandler - The handler function for resetting the game.
+ * @param {number} chosenNumber - The number that was chosen for the game.
+ * @param {array} guessRounds - The rounds taken to guess the number.
+ * @return {JSX.Element} The Game Over screen component.
+ */
 const GameOverScreen = ({ resetGameHandler, chosenNumber, guessRounds }) => {
   return (
     <View style={styles.container}>

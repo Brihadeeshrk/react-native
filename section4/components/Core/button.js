@@ -1,6 +1,16 @@
 import React from "react";
 import { Pressable, View, Text, StyleSheet } from "react-native";
 
+/**
+ * A higher-order component representing a customizable button.
+ *
+ * @param {object} children - The content of the button.
+ * @param {string} variant - The variant of the button (primary, secondary, reset).
+ * @param {function} onPress - The function to be executed when the button is pressed.
+ * @param {boolean} isDisabled - Whether the button is disabled or not.
+ * @param {object} style - Additional styles for the button.
+ * @return {JSX.Element} A Pressable component representing the button.
+ */
 const Button = ({ children, variant, onPress, isDisabled, style }) => {
   let buttonStyle;
 

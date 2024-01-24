@@ -5,6 +5,12 @@ import { Colors } from "../utils/colors";
 import Title from "../components/Core/title";
 import Card from "../components/Core/card";
 
+/**
+ * StartGameScreen component for guessing a number.
+ *
+ * @param {object} storeNumber - function to store the chosen number
+ * @return {JSX.Element} React component for the start game screen
+ */
 const StartGameScreen = ({ storeNumber }) => {
   const [number, setNumber] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);

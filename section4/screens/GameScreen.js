@@ -9,6 +9,17 @@ import Card from "../components/Core/card";
 import { Colors } from "../utils/colors";
 import RoundCard from "../components/Core/rounds";
 
+/**
+ * Generate a random number between the specified min and max values, excluding a specified number.
+ *
+ * This code snippet defines a function generateNumberBetween that generates a random number between the specified min and max values, excluding a specified exclude number.
+ * If the randomly generated number is equal to the exclude number, the function recursively calls itself to generate a new random number.
+ *
+ * @param {number} min - the minimum value of the range
+ * @param {number} max - the maximum value of the range
+ * @param {number} exclude - the number to be excluded from the random selection
+ * @return {number} the generated random number
+ */
 const generateNumberBetween = (min, max, exclude) => {
   const randomNumber = Math.floor(Math.random() * (max - min) + min);
 
@@ -19,6 +30,15 @@ const generateNumberBetween = (min, max, exclude) => {
 let minBoundary = 1;
 let maxBoundary = 100;
 
+/**
+ * Renders the game screen and handles user interactions for guessing a number.
+ *
+ * @param {object} chosenNumber - The number chosen by the user.
+ * @param {function} rightChoiceHandler - A function to handle the correct choice.
+ * @param {function} updateGuessRounds - A function to update the guess rounds.
+ * @param {array} rounds - An array of guess rounds.
+ * @return {JSX.Element} The rendered game screen component.
+ */
 const GameScreen = ({
   chosenNumber,
   rightChoiceHandler,

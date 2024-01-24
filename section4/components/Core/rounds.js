@@ -2,6 +2,12 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Colors } from "../../utils/colors";
 
+/**
+ * Render a round card component with the given item.
+ *
+ * @param {Object} item - The item to be displayed in the round card.
+ * @return {JSX.Element} A React element representing the round card.
+ */
 const RoundCard = ({ item }) => {
   return (
     <View style={styles.roundContainer}>

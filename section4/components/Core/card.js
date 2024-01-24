@@ -2,6 +2,12 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Colors } from "../../utils/colors";
 
+/**
+ * Renders a card component with the given children.
+ *
+ * @param {Object} children - The children to be rendered inside the card.
+ * @return {JSX.Element} The card component with the provided children.
+ */
 const Card = ({ children }) => {
   return <View style={styles.cardContainer}>{children}</View>;
 };

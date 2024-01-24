@@ -10,6 +10,11 @@ import GameScreen from "./screens/GameScreen";
 import GameOverScreen from "./screens/GameOverScreen";
 import { Colors } from "./utils/colors";
 
+/**
+ * Generates the main application component, responsible for handling the game logic and rendering different screens based on the game state.
+ *
+ * @return {JSX.Element} The main application component
+ */
 export default function App() {
   const [chosenNumber, setChosenNumber] = useState();
   const [gameOver, setGameOver] = useState(true);

@@ -2,6 +2,12 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Colors } from "../../utils/colors";
 
+/**
+ * Renders a Guess component with the provided children.
+ *
+ * @param {Object} children - The content to be rendered within the Guess component.
+ * @return {JSX.Element} A Guess component with the provided children.
+ */
 const Guess = ({ children }) => {
   return (
     <View style={styles.container}>
