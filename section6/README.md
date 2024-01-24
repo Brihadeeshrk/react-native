@@ -1,3 +1,12 @@
+# Section 6
+
+This section will cover
+
+- Navigation using the `React Navigation` package
+- In this section, we'll be using the `Drawer` as well as the `Native Stack` Navigator
+- You can also `Nest` Navigations as we've shown here
+
+```jsx
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -17,7 +26,7 @@ const Drawer = createDrawerNavigator();
 const DrawerNavigator = () => {
   return (
     <Drawer.Navigator
-      screenOptions={({ navigation, route }) => ({
+      screenOptions={{
         headerStyle: { backgroundColor: "#351401" },
         headerTintColor: "white",
         sceneContainerStyle: { backgroundColor: "#3f2f25" },
@@ -27,7 +36,7 @@ const DrawerNavigator = () => {
         drawerInactiveTintColor: "#FFF",
         drawerActiveTintColor: "#351401",
         drawerActiveBackgroundColor: "#e4baa1",
-      })}
+      }}
     >
       <Drawer.Screen
         name="MealsCategories"
@@ -84,3 +93,39 @@ export default function App() {
     </>
   );
 }
+```
+
+- In the above example, we are nesting the Drawer Navigation Inside a Stack Navigator
+- we can set styles for navigators from here, or from within screens
+- Every screen that is mounted here, receives 2 props, `navigation`, and `route`
+- We can navigate across multiple screens using the `navigation.navigate()` function, or we can completely replace views using the `navigation.replace()`
+- The other parameter is route, we can also optionally pass data from one screen to the other while calling the navigation.navigate() function
+- The way we do is that is using Key-Value pairs
+
+```jsx
+const moveToPage3 = () => {
+  navigation.navigate("Page3Screen", { name: "Page3" });
+};
+```
+
+- In the above, example, we're passing the data `name` to the `Page3Screen` screen which has a value of `Page3`
+- We can access this value in `Page3Screen` using the route parameter
+
+```jsx
+const pageDetails = route.params.name; //Page3
+```
+
+- Now, not all screens require a `navigation` or `route` parameter to move from one screen to another
+- We can use the `useNavigation()` offered by `@react-navigation/native` to move from one screen to the other
+
+```jsx
+import { useNavigation } from "@react-navigation/native";
+
+const NewComponent = ({ children }) => {
+  const navigation = useNavigation();
+
+  const moveToPage3 = () => {
+    navigation.navigate("Page3Screen", { name: "Page3" });
+  };
+};
+```
