@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Alert, Button, Image, StyleSheet, Text, View } from "react-native";
 import {
+  PermissionStatus,
   launchCameraAsync,
   useCameraPermissions,
-  PermissionStatus,
 } from "expo-image-picker";
+import React, { useState } from "react";
+import { Alert, Image, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../../constants/colors";
 import OutlineButton from "../UI/OutlineButton";
 
-const ImagePicker = () => {
+const ImagePicker = ({ onTakeImage }) => {
   const [pickedImage, setImage] = useState("");
   const [cameraPermission, requestCameraPermission] = useCameraPermissions();
 
@@ -42,6 +42,7 @@ const ImagePicker = () => {
     });
 
     setImage(image.assets[0].uri);
+    onTakeImage(image.assets[0].uri);
   };
 
   let imagePreview = <Text>No image taken yet.</Text>;
