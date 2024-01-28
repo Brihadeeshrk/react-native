@@ -2,7 +2,7 @@ import { View, Text, Pressable, Image } from "react-native";
 import React from "react";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import MasonryList from "@react-native-seoul/masonry-list";
-import { mealData } from "../constants/index";
+import { useNavigation } from "@react-navigation/native";
 import Animated, { FadeInDown } from "react-native-reanimated";
 
 export default function Recipes({ recipes }) {
@@ -16,7 +16,7 @@ export default function Recipes({ recipes }) {
       </Text>
 
       {/* Masonry Layout */}
-      {/* {recipes.length > 0 && ( */}
+
       <View>
         <MasonryList
           data={recipes}
@@ -30,13 +30,20 @@ export default function Recipes({ recipes }) {
           // onEndReached={() => loadNext(ITEM_CNT)}
         />
       </View>
-      {/* )} */}
     </View>
   );
 }
 
 const RecipeCard = ({ item, index }) => {
   const isEven = index % 2 === 0;
+
+  const navigation = useNavigation();
+
+  const onPress = () => {
+    navigation.navigate("Details", {
+      ...item,
+    });
+  };
 
   return (
     <Animated.View
@@ -52,6 +59,7 @@ const RecipeCard = ({ item, index }) => {
           paddingRight: isEven ? 8 : 0,
         }}
         className="flex justify-center mb-4 space-y-1"
+        onPress={onPress}
       >
         <Image
           source={{ uri: item.strMealThumb }}

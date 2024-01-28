@@ -6,6 +6,7 @@ import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import Categories from "../components/Categories";
 import useData from "../hooks/useData";
 import Recipes from "../components/Recipes";
+import Loading from "../components/Loading";
 
 const HomeScreen = () => {
   const { mealCategories, getRecipes } = useData();
@@ -90,8 +91,10 @@ const HomeScreen = () => {
 
         {/* recipes */}
         <View>
-          {mealCategories.length > 0 && mealRecipes.length > 0 && (
+          {mealCategories.length > 0 && mealRecipes.length > 0 ? (
             <Recipes recipes={mealRecipes} />
+          ) : (
+            <Loading size="large" className="mt-20" />
           )}
         </View>
       </ScrollView>
