@@ -22,7 +22,7 @@ export default function Categories({
           return (
             <>
               <TouchableOpacity
-                key={index.toString()}
+                key={item.strCategory}
                 onPress={() => setActiveCategory(item.strCategory)}
                 className="flex items-center space-y-1 mr-3"
               >

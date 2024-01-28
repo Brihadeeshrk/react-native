@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Image, ScrollView, Text, TextInput, View } from "react-native";
 import { BellIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
@@ -8,9 +8,20 @@ import useData from "../hooks/useData";
 import Recipes from "../components/Recipes";
 
 const HomeScreen = () => {
+  const { mealCategories, getRecipes } = useData();
   const [activeCategory, setActiveCategory] = useState("Beef");
+  const [mealRecipes, setMealRecipes] = useState([]);
 
-  const { mealCategories } = useData();
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      const recipes = await getRecipes(activeCategory);
+      if (recipes) {
+        setMealRecipes(recipes);
+      }
+    };
+
+    fetchRecipes();
+  }, [activeCategory]);
 
   return (
     <View className="flex-1 bg-white">
@@ -79,7 +90,9 @@ const HomeScreen = () => {
 
         {/* recipes */}
         <View>
-          <Recipes />
+          {mealCategories.length > 0 && mealRecipes.length > 0 && (
+            <Recipes recipes={mealRecipes} />
+          )}
         </View>
       </ScrollView>
     </View>
