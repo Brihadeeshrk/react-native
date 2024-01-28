@@ -47,7 +47,28 @@ const useData = () => {
       console.log("Error while fetching recipes", error.message);
     }
   };
-  return { mealCategories, getRecipes };
+
+  const getRecipeById = async (id) => {
+    try {
+      const response = await axios.get(
+        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.data && response) {
+        return response.data.meals;
+      }
+
+      return null;
+    } catch (error) {
+      console.log("Error while fetching recipe", error.message);
+    }
+  };
+  return { mealCategories, getRecipes, getRecipeById };
 };
 
 export default useData;

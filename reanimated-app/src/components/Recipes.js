@@ -61,7 +61,7 @@ const RecipeCard = ({ item, index }) => {
         className="flex justify-center mb-4 space-y-1"
         onPress={onPress}
       >
-        <Image
+        <Animated.Image
           source={{ uri: item.strMealThumb }}
           style={{
             width: "100%",
@@ -69,6 +69,7 @@ const RecipeCard = ({ item, index }) => {
             borderRadius: 35,
           }}
           className="bg-black/5"
+          sharedTransitionTag={item.strMeal}
         />
         <Text
           className="text-neutral-600 font-semibold ml-2"
